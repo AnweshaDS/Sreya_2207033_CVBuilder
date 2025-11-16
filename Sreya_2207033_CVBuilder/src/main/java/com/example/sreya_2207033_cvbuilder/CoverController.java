@@ -14,17 +14,14 @@ public class CoverController {
     @FXML
     private void handleCreateNewCv() {
         try {
-            // Load the next page (NextScreen.fxml must be in the same package)
             Parent root = FXMLLoader.load(getClass().getResource("NextScreen.fxml"));
 
-            // Get current window (stage)
             Stage stage = (Stage) createNewCvBtn.getScene().getWindow();
 
-            // Set the new scene
             Scene scene = new Scene(root);
             stage.setScene(scene);
 
-            // Optional: keep window size consistent
+
             stage.show();
 
         } catch (Exception e) {
@@ -36,11 +33,7 @@ public class CoverController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
-        // LATER, REPLACE WITH:
-        // Parent root = FXMLLoader.load(getClass().getResource("NextScreen.fxml"));
-        // Stage stage = (Stage) createNewCvBtn.getScene().getWindow();
-        // stage.setScene(new Scene(root));
-        // stage.show();
+
     }
 }
 
