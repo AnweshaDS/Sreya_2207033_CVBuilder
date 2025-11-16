@@ -1,12 +1,16 @@
 package com.example.sreya_2207033_cvbuilder;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -111,6 +115,48 @@ public class NextScreenController {
             alert.showAndWait();
             return;
         }
+        // ===== Collect Data =====
+        CVData data = new CVData();
+        data.fullName = fullNameField.getText();
+        data.email = emailField.getText();
+        data.phone = phoneField.getText();
+        data.address = addressField.getText();
+
+        data.skills = skillsField.getText();
+        data.experience = experienceField.getText();
+        data.projects = projectsField.getText();
+
+        data.photo = profileImageView.getImage();
+
+// Collect education rows
+        List<String> list = new ArrayList<>();
+        for (EducationEntry e : educationEntries) {
+            String formatted = e.degree.getText() + " - " +
+                    e.institute.getText() + " | CGPA: " +
+                    e.cgpa.getText() + " | Year: " +
+                    e.year.getText();
+
+            list.add(formatted);
+        }
+        data.educationList = list;
+
+// ===== Load PreviewCV.fxml =====
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PreviewCV.fxml"));
+            Parent root = loader.load();
+
+            PreviewCVController controller = loader.getController();
+            controller.setData(data);
+
+            Stage stage = new Stage();
+            stage.setTitle("CV Preview");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("CV Generated!");
