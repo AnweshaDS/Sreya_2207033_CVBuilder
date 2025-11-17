@@ -21,7 +21,7 @@ public class PreviewCVController {
 
     @FXML private VBox previewEducationList;
 
-    // ========= METHOD CALLED FROM NextScreenController =========
+    //  METHOD CALLED FROM NextScreenController
     public void setData(CVData data) {
 
         previewName.setText(data.fullName);
@@ -38,7 +38,6 @@ public class PreviewCVController {
         }
 
         // Add education entries dynamically
-        // Add education entries dynamically with PeachPuff color
         for (String edu : data.educationList) {
             Label label = new Label(edu);
             label.setStyle("-fx-font-size: 14px; -fx-text-fill: #FFDAB9;");

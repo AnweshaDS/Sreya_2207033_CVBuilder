@@ -13,7 +13,7 @@
 
 <ScrollPane fx:id="scrollPane" fitToWidth="true" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sreya_2207033_cvbuilder.NextScreenController">
 
-    <VBox alignment="TOP_CENTER" spacing="15" style="-fx-background-color: #971818;">
+    <VBox alignment="TOP_CENTER" spacing="15" style="-fx-background-color: #20B2AA;">
         <padding>
             <Insets bottom="20" left="30" right="30" top="20" />
         </padding>
@@ -127,7 +127,7 @@
             <TextArea fx:id="projectsField" prefHeight="150" />
 
             <!-- Generate CV Button -->
-            <Button onAction="#handleGenerateCV" prefWidth="200" style="-fx-font-size: 18px; -fx-background-color: #0b6fa4; -fx-text-fill: white;" text="Generate CV" />
+            <Button onAction="#handleGenerateCV" prefWidth="200" style="-fx-font-size: 18px; -fx-background-color: #4B0082; -fx-text-fill: white;" text="Generate CV" />
 
         </VBox>
     </VBox>
