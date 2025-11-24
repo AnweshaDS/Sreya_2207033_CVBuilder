@@ -73,7 +73,7 @@ public class PreviewCVController {
                 // 1) insert user
                 com.example.sreya_2207033_cvbuilder.model.User user =
                         new com.example.sreya_2207033_cvbuilder.model.User(cvData.fullName, cvData.email, cvData.phone, null);
-                int userId = userDAO.insertUser(user);
+                int userId = userDAO.insert(user);
 
                 // 2) insert education rows (each entry is a formatted string)
                 for (String edu : cvData.educationList) {

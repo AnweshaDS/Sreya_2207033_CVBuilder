@@ -1,28 +1,28 @@
 package com.example.sreya_2207033_cvbuilder.database.dao;
 
 import com.example.sreya_2207033_cvbuilder.database.DatabaseConnection;
-import com.example.sreya_2207033_cvbuilder.model.Experience;
+import com.example.sreya_2207033_cvbuilder.model.Project;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExperienceDAO {
+public class ProjectDAO {
 
-    // INSERT
-    public void insert(Experience experience) {
-        String sql = "INSERT INTO experience (userId, description) VALUES (?, ?)";
+
+    public void insert(Project project) {
+        String sql = "INSERT INTO project (userId, description) VALUES (?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, experience.getUserId());
-            stmt.setString(2, experience.getDescription());
+            stmt.setInt(1, project.getUserId());
+            stmt.setString(2, project.getDescription());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 int id = rs.getInt(1);
-                experience.setId(id);
+                project.setId(id);
             }
 
         } catch (Exception e) {
@@ -31,9 +31,9 @@ public class ExperienceDAO {
     }
 
 
-    public List<Experience> getByUserId(int userId) {
-        List<Experience> list = new ArrayList<>();
-        String sql = "SELECT * FROM experience WHERE userId = ?";
+    public List<Project> getByUserId(int userId) {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT * FROM project WHERE userId = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -42,11 +42,11 @@ public class ExperienceDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Experience exp = new Experience();
-                exp.setId(rs.getInt("id"));
-                exp.setUserId(rs.getInt("userId"));
-                exp.setDescription(rs.getString("description"));
-                list.add(exp);
+                Project pr = new Project();
+                pr.setId(rs.getInt("id"));
+                pr.setUserId(rs.getInt("userId"));
+                pr.setDescription(rs.getString("description"));
+                list.add(pr);
             }
 
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class ExperienceDAO {
 
 
     public void deleteByUserId(int userId) {
-        String sql = "DELETE FROM experience WHERE userId = ?";
+        String sql = "DELETE FROM project WHERE userId = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

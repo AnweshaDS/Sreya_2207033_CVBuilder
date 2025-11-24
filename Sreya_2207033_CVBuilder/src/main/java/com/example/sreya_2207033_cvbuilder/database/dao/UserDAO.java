@@ -10,7 +10,7 @@ import java.util.List;
 public class UserDAO {
 
     // insert user and return generated id
-    public int insertUser(User user) throws SQLException {
+    public int insert(User user) throws SQLException {
         String sql = "INSERT INTO users(full_name, email, phone, summary) VALUES(?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -114,3 +114,4 @@ public class UserDAO {
         }
     }
 }
+

@@ -1,5 +1,10 @@
 package com.example.sreya_2207033_cvbuilder;
 
+import com.example.sreya_2207033_cvbuilder.database.dao.EducationDAO;
+import com.example.sreya_2207033_cvbuilder.database.dao.SkillDAO;
+import com.example.sreya_2207033_cvbuilder.database.dao.UserDAO;
+import com.example.sreya_2207033_cvbuilder.database.dao.ExperienceDAO;
+import com.example.sreya_2207033_cvbuilder.database.dao.ProjectDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -146,11 +151,44 @@ public class NextScreenController {
         }
         data.educationList = list;
         // SAVE TO DB
+        // SAVE TO DB
         User user = new User();
-        user.fullName = data.fullName;
-        user.email = data.email;
-        user.phone = data.phone;
-        user.address = data.address;
+        user.setFullName(data.fullName);
+        user.setEmail(data.email);
+        user.setPhone(data.phone);
+        user.setSummary(data.summary);
+
+        UserDAO userDAO = new UserDAO();
+        int userId = userDAO.insert(user);
+
+// save education list
+        EducationDAO educationDAO = new EducationDAO();
+        for (String eduDetails : data.educationList) {
+            Education edu = new Education(userId, eduDetails);
+            educationDAO.insert(edu);
+        }
+
+// save skills
+        SkillDAO skillDAO = new SkillDAO();
+        for (String skillName : data.skillsList) {
+            Skill skill = new Skill(userId, skillName);
+            skillDAO.insert(skill);
+        }
+
+// save experience
+        ExperienceDAO experienceDAO = new ExperienceDAO();
+        for (String expDetails : data.experienceList) {
+            Experience exp = new Experience(userId, expDetails);
+            experienceDAO.insert(exp);
+        }
+
+// save projects
+        com.example.sreya_2207033_cvbuilder.dao.ProjectDAO projectDAO = new com.example.sreya_2207033_cvbuilder.dao.ProjectDAO();
+        for (String projDetails : data.projectsList) {
+            Project proj = new Project(userId, projDetails);
+            projectDAO.insert(proj);
+        }
+
 
         UserDAO userDAO = new UserDAO();
         int userId = userDAO.insert(user);
@@ -175,7 +213,7 @@ public class NextScreenController {
         }
 
 // experience
-        ExperienceDAO expDAO = new ExperienceDAO();
+        ExperienceDAO expDAO = new com.example.sreya_2207033_cvbuilder.dao.ExperienceDAO();
         Experience exp = new Experience();
         exp.userId = userId;
         exp.description = data.experience;
