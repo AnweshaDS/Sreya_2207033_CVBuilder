@@ -9,6 +9,7 @@ module com.example.sreya_2207033_cvbuilder {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.example.sreya_2207033_cvbuilder to javafx.fxml;
     exports com.example.sreya_2207033_cvbuilder;
