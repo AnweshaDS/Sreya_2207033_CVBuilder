@@ -15,6 +15,12 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.sreya_2207033_cvbuilder.model.User;
+import com.example.sreya_2207033_cvbuilder.model.Education;
+import com.example.sreya_2207033_cvbuilder.model.Skill;
+import com.example.sreya_2207033_cvbuilder.model.Experience;
+import com.example.sreya_2207033_cvbuilder.model.Project;
+
 
 public class NextScreenController {
 
@@ -139,6 +145,49 @@ public class NextScreenController {
             list.add(formatted);
         }
         data.educationList = list;
+        // SAVE TO DB
+        User user = new User();
+        user.fullName = data.fullName;
+        user.email = data.email;
+        user.phone = data.phone;
+        user.address = data.address;
+
+        UserDAO userDAO = new UserDAO();
+        int userId = userDAO.insert(user);
+
+// save education list
+        EducationDAO eduDAO = new EducationDAO();
+        for (String edu : data.educationList) {
+            String[] parts = edu.split("\\|");
+            Education e = new Education();
+            e.userId = userId;
+            // parse degree, institution, cgpa, year properly
+            eduDAO.insert(e);
+        }
+
+// save skills
+        SkillDAO skillDAO = new SkillDAO();
+        for (String s : data.skills.split(",")) {
+            Skill sk = new Skill();
+            sk.userId = userId;
+            sk.skill = s.trim();
+            skillDAO.insert(sk);
+        }
+
+// experience
+        ExperienceDAO expDAO = new ExperienceDAO();
+        Experience exp = new Experience();
+        exp.userId = userId;
+        exp.description = data.experience;
+        expDAO.insert(exp);
+
+// projects
+        ProjectDAO projDAO = new ProjectDAO();
+        Project pr = new Project();
+        pr.userId = userId;
+        pr.description = data.projects;
+        projDAO.insert(pr);
+
 
 // ===== Load PreviewCV.fxml =====
         try {
