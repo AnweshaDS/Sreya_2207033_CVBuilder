@@ -15,17 +15,17 @@ public class DatabaseInitializer {
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     full_name TEXT,
                     email TEXT,
-                    phone TEXT
+                    phone TEXT,
+                    summary TEXT
                 );
             """);
 
+            // store each education row as a single TEXT 'details' (keeps UI -> DB simple)
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS education (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     user_id INTEGER,
-                    degree TEXT,
-                    institution TEXT,
-                    year TEXT
+                    details TEXT
                 );
             """);
 
@@ -36,6 +36,8 @@ public class DatabaseInitializer {
                     skill_name TEXT
                 );
             """);
+
+            System.out.println("Database initialized (tables ensured).");
 
         } catch (SQLException e) {
             e.printStackTrace();
