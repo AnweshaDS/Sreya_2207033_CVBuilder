@@ -14,7 +14,9 @@ public class CoverController {
     @FXML
     private void handleCreateNewCv() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("NextScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NextScreen.fxml"));
+            Parent root = loader.load();
+            NextScreenController controller = loader.getController();
 
             Stage stage = (Stage) createNewCvBtn.getScene().getWindow();
 

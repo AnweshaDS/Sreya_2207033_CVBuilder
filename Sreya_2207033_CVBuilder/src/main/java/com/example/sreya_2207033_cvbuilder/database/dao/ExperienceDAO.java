@@ -2,38 +2,34 @@ package com.example.sreya_2207033_cvbuilder.database.dao;
 
 import com.example.sreya_2207033_cvbuilder.database.DatabaseConnection;
 import com.example.sreya_2207033_cvbuilder.model.Experience;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExperienceDAO {
 
-    // INSERT
-    public void insert(Experience experience) {
-        String sql = "INSERT INTO experience (userId, description) VALUES (?, ?)";
+    // INSERT using userId + description (matches controller)
+    public void insert(int userId, String description) throws SQLException {
+        String sql = "INSERT INTO experience (user_id, description) VALUES (?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, experience.getUserId());
-            stmt.setString(2, experience.getDescription());
+            stmt.setInt(1, userId);
+            stmt.setString(2, description);
             stmt.executeUpdate();
 
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                experience.setId(id);
-            }
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
-
+    // FETCH experience for a user
     public List<Experience> getByUserId(int userId) {
         List<Experience> list = new ArrayList<>();
-        String sql = "SELECT * FROM experience WHERE userId = ?";
+        String sql = "SELECT * FROM experience WHERE user_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -44,20 +40,21 @@ public class ExperienceDAO {
             while (rs.next()) {
                 Experience exp = new Experience();
                 exp.setId(rs.getInt("id"));
-                exp.setUserId(rs.getInt("userId"));
+                exp.setUserId(rs.getInt("user_id"));
                 exp.setDescription(rs.getString("description"));
                 list.add(exp);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return list;
     }
 
-
+    // DELETE experience entries for user
     public void deleteByUserId(int userId) {
-        String sql = "DELETE FROM experience WHERE userId = ?";
+        String sql = "DELETE FROM experience WHERE user_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -65,7 +62,7 @@ public class ExperienceDAO {
             stmt.setInt(1, userId);
             stmt.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
