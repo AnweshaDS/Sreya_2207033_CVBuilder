@@ -1,10 +1,14 @@
 package com.example.sreya_2207033_cvbuilder;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class PreviewCVController {
 
@@ -44,9 +48,24 @@ public class PreviewCVController {
         }
 
     }
+    private void openRecordsWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RecordsView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Saved Records");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void handleDone() {
-        System.exit(0);
+        openRecordsWindow();
     }
 }

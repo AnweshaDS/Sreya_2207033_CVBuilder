@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.sreya_2207033_cvbuilder.RecordsController">
+
+    <center>
+        <ListView fx:id="recordsList" prefWidth="300" prefHeight="400"/>
+    </center>
+
+</BorderPane>
