@@ -5,15 +5,15 @@ public class User {
     private String fullName;
     private String email;
     private String phone;
-    private String summary; // optional/notes
+    private String address; // optional/notes
 
     public User() {}
 
-    public User(String fullName, String email, String phone, String summary) {
+    public User(String fullName, String email, String phone, String address) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
-        this.summary = summary;
+        this.address = address;
     }
 
     public int getId() { return id; }
@@ -28,8 +28,8 @@ public class User {
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
 
-    public String getSummary() { return summary; }
-    public void setSummary(String summary) { this.summary = summary; }
+    public String getSummary() { return address; }
+    public void setSummary(String summary) { this.address = summary; }
 
     @Override
     public String toString() {
