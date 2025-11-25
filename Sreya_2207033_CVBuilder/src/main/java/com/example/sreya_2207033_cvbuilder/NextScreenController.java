@@ -117,16 +117,16 @@ public class NextScreenController {
         }
 
         CVData data = new CVData();
-        data.fullName = fullNameField.getText();
-        data.email = emailField.getText();
-        data.phone = phoneField.getText();
-        data.address = addressField.getText();
+        data.setFullName(fullNameField.getText());
+        data.setEmail(emailField.getText());
+        data.setPhone(phoneField.getText());
+        data.setAddress(addressField.getText());
 
-        data.skills = skillsField.getText();
-        data.experience = experienceField.getText();
-        data.projects = projectsField.getText();
+        data.setSkills(skillsField.getText());
+        data.setExperience(experienceField.getText());
+        data.setProjects(projectsField.getText());
 
-        data.photo = profileImageView.getImage();
+        data.setPhoto(profileImageView.getImage());
 
 
         List<String> list = new ArrayList<>();
@@ -138,7 +138,7 @@ public class NextScreenController {
 
             list.add(formatted);
         }
-        data.educationList = list;
+        data.setEducationList(list);
 
 
         try {

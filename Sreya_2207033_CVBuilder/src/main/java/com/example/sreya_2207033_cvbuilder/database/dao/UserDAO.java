@@ -18,7 +18,7 @@ public class UserDAO {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
-            ps.setString(4, user.getSummary());
+            ps.setString(4, user.getAddress());
             ps.executeUpdate();
 
             try (ResultSet keys = ps.getGeneratedKeys()) {
@@ -46,7 +46,7 @@ public class UserDAO {
                 u.setFullName(rs.getString("full_name"));
                 u.setEmail(rs.getString("email"));
                 u.setPhone(rs.getString("phone"));
-                u.setSummary(rs.getString("summary"));
+                u.setAddress(rs.getString("summary"));
                 list.add(u);
             }
         }
@@ -66,7 +66,7 @@ public class UserDAO {
                     u.setFullName(rs.getString("full_name"));
                     u.setEmail(rs.getString("email"));
                     u.setPhone(rs.getString("phone"));
-                    u.setSummary(rs.getString("summary"));
+                    u.setAddress(rs.getString("summary"));
                     return u;
                 }
             }
@@ -81,7 +81,7 @@ public class UserDAO {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
-            ps.setString(4, user.getSummary());
+            ps.setString(4, user.getAddress());
             ps.setInt(5, user.getId());
             ps.executeUpdate();
         }

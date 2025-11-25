@@ -5,7 +5,8 @@ public class User {
     private String fullName;
     private String email;
     private String phone;
-    private String address; // optional/notes
+    private String address;
+    private String photoPath;
 
     public User() {}
 
@@ -28,11 +29,14 @@ public class User {
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
 
-    public String getSummary() { return address; }
-    public void setSummary(String summary) { this.address = summary; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+
+    public String getPhotoPath() { return photoPath; }
+    public void setPhotoPath(String photoPath) { this.photoPath = photoPath; }
 
     @Override
     public String toString() {
-        return id + ": " + fullName;
+        return id + " - " + fullName;
     }
 }

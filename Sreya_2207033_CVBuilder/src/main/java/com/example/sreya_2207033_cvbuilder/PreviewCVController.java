@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,29 +24,35 @@ public class PreviewCVController {
 
     @FXML private VBox previewEducationList;
 
-
     public void setData(CVData data) {
 
-        previewName.setText(data.fullName);
-        previewEmail.setText("Email: " + data.email);
-        previewPhone.setText("Phone: " + data.phone);
-        previewAddress.setText("Address: " + data.address);
+        // Basic info
+        previewName.setText(data.getFullName());
+        previewEmail.setText("Email: " + data.getEmail());
+        previewPhone.setText("Phone: " + data.getPhone());
+        previewAddress.setText("Address: " + data.getAddress());
 
-        previewSkills.setText(data.skills);
-        previewExperience.setText(data.experience);
-        previewProjects.setText(data.projects);
+        // Text sections
+        previewSkills.setText(data.getSkills());
+        previewExperience.setText(data.getExperience());
+        previewProjects.setText(data.getProjects());
 
-        if (data.photo != null) {
-            previewPhoto.setImage(data.photo);
+        // Photo
+        if (data.getPhoto() != null) {
+            previewPhoto.setImage(data.getPhoto());
         }
 
-        for (String edu : data.educationList) {
-            Label label = new Label(edu);
-            label.setStyle("-fx-font-size: 14px; -fx-text-fill: #FFDAB9;");
-            previewEducationList.getChildren().add(label);
+        // Education list
+        previewEducationList.getChildren().clear();
+        if (data.getEducationList() != null) {
+            for (String edu : data.getEducationList()) {
+                Label label = new Label(edu);
+                label.setStyle("-fx-font-size: 14px; -fx-text-fill: #FFDAB9;");
+                previewEducationList.getChildren().add(label);
+            }
         }
-
     }
+
     private void openRecordsWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RecordsView.fxml"));
@@ -62,7 +67,6 @@ public class PreviewCVController {
             ex.printStackTrace();
         }
     }
-
 
     @FXML
     private void handleDone() {
