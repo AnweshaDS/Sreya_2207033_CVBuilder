@@ -88,7 +88,6 @@ public class UserDAO {
     }
 
     public void deleteUser(int id) throws SQLException {
-        // remove child rows before deleting user
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             try (PreparedStatement p1 = conn.prepareStatement("DELETE FROM education WHERE user_id=?");

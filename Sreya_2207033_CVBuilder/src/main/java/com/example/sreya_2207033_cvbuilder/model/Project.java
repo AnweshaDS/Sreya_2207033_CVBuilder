@@ -3,7 +3,7 @@ package com.example.sreya_2207033_cvbuilder.model;
 public class Project {
     private int id;
     private int userId;
-    private String description; // full multiline project text
+    private String description;
 
     public Project() {}
 

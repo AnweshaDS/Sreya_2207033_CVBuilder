@@ -63,7 +63,7 @@
             </VBox>
 
             <!-- Done Button -->
-            <Button onAction="#handleDone" style="-fx-padding: 12; -fx-font-size: 18px; -fx-background-color: #FFF8DC; -fx-text-fill: black;" text="Done" />
+            <Button onAction="#handleDone" style="-fx-padding: 12; -fx-font-size: 18px; -fx-background-color: #FFF8DC; -fx-text-fill: black;" text="Save" />
 
         </VBox>
 

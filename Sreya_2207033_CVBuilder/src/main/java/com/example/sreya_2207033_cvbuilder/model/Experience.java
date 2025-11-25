@@ -3,7 +3,7 @@ package com.example.sreya_2207033_cvbuilder.model;
 public class Experience {
     private int id;
     private int userId;
-    private String description; // full multiline experience text
+    private String description;
 
     public Experience() {}
 

@@ -10,6 +10,13 @@ public class DatabaseInitializer {
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
 
+            if (conn != null) {
+                System.out.println(" DATABASE CONNECTED SUCCESSFULLY!");
+            } else {
+                System.out.println(" DATABASE CONNECTION FAILED!");
+                return;
+            }
+
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,9 +59,11 @@ public class DatabaseInitializer {
                 );
             """);
 
-            System.out.println("✅ Database initialized (all tables ensured)");
+            System.out.println(" All tables created or already exist.");
+            System.out.println(" Database initialization complete.");
 
         } catch (SQLException e) {
+            System.out.println(" DATABASE ERROR: " + e.getMessage());
             e.printStackTrace();
         }
     }

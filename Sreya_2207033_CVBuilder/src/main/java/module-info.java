@@ -13,4 +13,7 @@ module com.example.sreya_2207033_cvbuilder {
 
     opens com.example.sreya_2207033_cvbuilder to javafx.fxml;
     exports com.example.sreya_2207033_cvbuilder;
+    opens com.example.sreya_2207033_cvbuilder.database to java.sql;
+    exports com.example.sreya_2207033_cvbuilder.database;
+
 }

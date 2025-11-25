@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ProjectDAO {
 
-    // INSERT using userId + description (matches controller)
     public void insert(int userId, String description) throws SQLException {
         String sql = "INSERT INTO project (user_id, description) VALUES (?, ?)";
 
@@ -26,7 +25,6 @@ public class ProjectDAO {
         }
     }
 
-    // FETCH all projects for a user
     public List<Project> getByUserId(int userId) {
         List<Project> list = new ArrayList<>();
         String sql = "SELECT * FROM project WHERE user_id = ?";

@@ -8,6 +8,12 @@ public class DatabaseConnection {
     private static final String URL = "jdbc:sqlite:app.db"; // local file database
 
     public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("org.sqlite.JDBC"); // ← IMPORTANT
+        } catch (ClassNotFoundException e) {
+            System.out.println(" SQLite JDBC driver not found!");
+        }
+
         return DriverManager.getConnection(URL);
     }
 

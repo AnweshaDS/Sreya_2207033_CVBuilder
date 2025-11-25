@@ -1,6 +1,5 @@
 package com.example.sreya_2207033_cvbuilder;
 
-import com.example.sreya_2207033_cvbuilder.database.dao.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,11 +13,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NextScreenController {
+
 
     @FXML private VBox educationList;
     @FXML private ImageView profileImageView;
@@ -32,6 +31,7 @@ public class NextScreenController {
     @FXML private TextArea experienceField;
     @FXML private TextArea projectsField;
 
+
     private static class EducationEntry {
         TextField degree;
         TextField institute;
@@ -41,8 +41,11 @@ public class NextScreenController {
 
     private final List<EducationEntry> educationEntries = new ArrayList<>();
 
+
+
     @FXML
     private void handleAddEducation() {
+
         HBox row = new HBox(10);
         row.setStyle("-fx-padding: 5;");
 
@@ -53,9 +56,16 @@ public class NextScreenController {
         entry.year = new TextField();
 
         entry.degree.setPromptText("Degree");
+        entry.degree.setPrefWidth(200);
+
         entry.institute.setPromptText("Institute");
+        entry.institute.setPrefWidth(250);
+
         entry.cgpa.setPromptText("CGPA/GPA");
+        entry.cgpa.setPrefWidth(120);
+
         entry.year.setPromptText("Year");
+        entry.year.setPrefWidth(100);
 
         row.getChildren().addAll(
                 entry.degree,
@@ -68,23 +78,31 @@ public class NextScreenController {
         educationList.getChildren().add(row);
     }
 
+
+
     @FXML
     private void handleUploadPhoto() {
-        FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Profile Photo");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(
+                        "Images", "*.png", "*.jpg", "*.jpeg"
+                )
         );
 
-        File file = chooser.showOpenDialog(null);
+        File file = fileChooser.showOpenDialog(null);
+
         if (file != null) {
             Image image = new Image(file.toURI().toString());
             profileImageView.setImage(image);
         }
     }
 
+
+
     @FXML
-    private void handleGenerateCV() throws SQLException {
-        System.out.println("BUTTON CLICKED");
+    private void handleGenerateCV() {
 
         if (fullNameField.getText().isEmpty() ||
                 emailField.getText().isEmpty() ||
@@ -98,60 +116,33 @@ public class NextScreenController {
             return;
         }
 
-        // ===== Collect CV Data =====
         CVData data = new CVData();
-        data.setFullName(fullNameField.getText());
-        data.setEmail(emailField.getText());
-        data.setPhone(phoneField.getText());
-        data.setAddress(addressField.getText());
-        data.setSkills(skillsField.getText());
-        data.setExperience(experienceField.getText());
-        data.setProjects(projectsField.getText());
-        data.setPhoto(profileImageView.getImage());
+        data.fullName = fullNameField.getText();
+        data.email = emailField.getText();
+        data.phone = phoneField.getText();
+        data.address = addressField.getText();
 
-        List<String> eduList = new ArrayList<>();
+        data.skills = skillsField.getText();
+        data.experience = experienceField.getText();
+        data.projects = projectsField.getText();
+
+        data.photo = profileImageView.getImage();
+
+
+        List<String> list = new ArrayList<>();
         for (EducationEntry e : educationEntries) {
-            eduList.add(
-                    e.degree.getText() + " - " +
-                            e.institute.getText() + " | CGPA: " +
-                            e.cgpa.getText() + " | Year: " +
-                            e.year.getText()
-            );
+            String formatted = e.degree.getText() + " - " +
+                    e.institute.getText() + " | CGPA: " +
+                    e.cgpa.getText() + " | Year: " +
+                    e.year.getText();
+
+            list.add(formatted);
         }
-        data.setEducationList(eduList);
+        data.educationList = list;
 
 
-        // ===== STORE TO DATABASE =====
-        UserDAO userDAO = new UserDAO();
-        int userId = userDAO.insert(
-                new com.example.sreya_2207033_cvbuilder.model.User(
-                        data.getFullName(),
-                        data.getEmail(),
-                        data.getPhone(),
-                        data.getAddress()
-                )
-        );
-
-        EducationDAO eduDAO = new EducationDAO();
-        for (String eduText : data.getEducationList()) {
-            eduDAO.insertEducation(userId, eduText);
-        }
-
-        SkillDAO skillDAO = new SkillDAO();
-        for (String skill : data.getSkills().split(",")) {
-            skillDAO.insertSkill(userId, skill.trim());
-        }
-
-        ExperienceDAO expDAO = new ExperienceDAO();
-        expDAO.insert(userId, data.getExperience());
-
-        ProjectDAO projDAO = new ProjectDAO();
-        projDAO.insert(userId, data.getProjects());
-
-
-        // ===== OPEN PREVIEW SCREEN =====
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/sreya_2207033_cvbuilder/PreviewCV.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PreviewCV.fxml"));
             Parent root = loader.load();
 
             PreviewCVController controller = loader.getController();
@@ -166,10 +157,11 @@ public class NextScreenController {
             ex.printStackTrace();
         }
 
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("CV Generated!");
         alert.setHeaderText("Your CV has been generated.");
-        alert.setContentText("Preview window opened.");
+        alert.setContentText("Next step: show formatted preview screen.");
         alert.showAndWait();
     }
 }

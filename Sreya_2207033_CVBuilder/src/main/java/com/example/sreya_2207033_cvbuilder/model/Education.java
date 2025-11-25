@@ -3,7 +3,7 @@ package com.example.sreya_2207033_cvbuilder.model;
 public class Education {
     private int id;
     private int userId;
-    private String details; // store formatted string from UI
+    private String details;
 
     public Education() {}
     public Education(int userId, String details) {

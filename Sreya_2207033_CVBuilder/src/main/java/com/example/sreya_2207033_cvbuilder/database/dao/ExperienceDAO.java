@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ExperienceDAO {
 
-    // INSERT using userId + description (matches controller)
     public void insert(int userId, String description) throws SQLException {
         String sql = "INSERT INTO experience (user_id, description) VALUES (?, ?)";
 
@@ -26,7 +25,6 @@ public class ExperienceDAO {
         }
     }
 
-    // FETCH experience for a user
     public List<Experience> getByUserId(int userId) {
         List<Experience> list = new ArrayList<>();
         String sql = "SELECT * FROM experience WHERE user_id = ?";
@@ -52,7 +50,6 @@ public class ExperienceDAO {
         return list;
     }
 
-    // DELETE experience entries for user
     public void deleteByUserId(int userId) {
         String sql = "DELETE FROM experience WHERE user_id = ?";
 
