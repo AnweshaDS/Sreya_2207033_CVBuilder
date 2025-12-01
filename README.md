@@ -12,6 +12,8 @@ A JavaFX application to generate CV after taking diiferent types of informations
 
 3.Preview CV
 
+4.A database page
+
 
 
 **Features:**
@@ -36,6 +38,8 @@ A JavaFX application to generate CV after taking diiferent types of informations
 
 
 
+
+
 **Used:**
 
 1.JavaFX
@@ -45,6 +49,8 @@ A JavaFX application to generate CV after taking diiferent types of informations
 3.SceneBuilder
 
 4.IntelliJ IDEA IDE
+
+5.SQLite
 
 
 
@@ -56,9 +62,5 @@ A JavaFX application to generate CV after taking diiferent types of informations
 
 3.Display alerts and confirmations are added.
 
-
-
-
-
-
+4.The database can only save the users personal information, couldn't add the other parts in the database saved page.
 
