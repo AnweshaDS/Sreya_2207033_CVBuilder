@@ -6,6 +6,7 @@ public class User {
     private String email;
     private String phone;
     private String address;
+    private String summary;
     private String photoPath;
 
     public User() {}
@@ -31,6 +32,9 @@ public class User {
 
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
+
+    public String getSummary() { return summary; }
+    public void setSummary(String summary) { this.summary = summary; }
 
     public String getPhotoPath() { return photoPath; }
     public void setPhotoPath(String photoPath) { this.photoPath = photoPath; }

@@ -16,7 +16,44 @@ public class DatabaseInitializer {
                     email TEXT,
                     phone TEXT,
                     address TEXT,
+                    summary TEXT,
                     photo_path TEXT
+                );
+            """);
+
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS education (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    details TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+            """);
+
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS experience (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    description TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+            """);
+
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS skills (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    skill_name TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+            """);
+
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS projects (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    description TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
                 );
             """);
 

@@ -11,7 +11,7 @@ public class UserDAO {
 
     // insert user and return generated id
     public int insert(User user) throws SQLException {
-        String sql = "INSERT INTO users(full_name, email, phone, summary) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO users(full_name, email, phone, address, summary, photo_path) VALUES(?,?,?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -19,6 +19,8 @@ public class UserDAO {
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
             ps.setString(4, user.getAddress());
+            ps.setString(5, user.getSummary());
+            ps.setString(6, user.getPhotoPath());
             ps.executeUpdate();
 
             try (ResultSet keys = ps.getGeneratedKeys()) {
@@ -35,7 +37,7 @@ public class UserDAO {
 
     public List<User> getAllUsers() throws SQLException {
         List<User> list = new ArrayList<>();
-        String sql = "SELECT id, full_name, email, phone, summary FROM users ORDER BY id DESC";
+        String sql = "SELECT id, full_name, email, phone, address, summary, photo_path FROM users ORDER BY id DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -46,7 +48,9 @@ public class UserDAO {
                 u.setFullName(rs.getString("full_name"));
                 u.setEmail(rs.getString("email"));
                 u.setPhone(rs.getString("phone"));
-                u.setAddress(rs.getString("summary"));
+                u.setAddress(rs.getString("address"));
+                u.setSummary(rs.getString("summary"));
+                u.setPhotoPath(rs.getString("photo_path"));
                 list.add(u);
             }
         }
@@ -54,7 +58,7 @@ public class UserDAO {
     }
 
     public User getById(int id) throws SQLException {
-        String sql = "SELECT id, full_name, email, phone, summary FROM users WHERE id = ?";
+        String sql = "SELECT id, full_name, email, phone, address, summary, photo_path FROM users WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -66,7 +70,9 @@ public class UserDAO {
                     u.setFullName(rs.getString("full_name"));
                     u.setEmail(rs.getString("email"));
                     u.setPhone(rs.getString("phone"));
-                    u.setAddress(rs.getString("summary"));
+                    u.setAddress(rs.getString("address"));
+                    u.setSummary(rs.getString("summary"));
+                    u.setPhotoPath(rs.getString("photo_path"));
                     return u;
                 }
             }
@@ -75,14 +81,16 @@ public class UserDAO {
     }
 
     public void updateUser(User user) throws SQLException {
-        String sql = "UPDATE users SET full_name=?, email=?, phone=?, summary=? WHERE id=?";
+        String sql = "UPDATE users SET full_name=?, email=?, phone=?, address=?, summary=?, photo_path=? WHERE id=?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
             ps.setString(4, user.getAddress());
-            ps.setInt(5, user.getId());
+            ps.setString(5, user.getSummary());
+            ps.setString(6, user.getPhotoPath());
+            ps.setInt(7, user.getId());
             ps.executeUpdate();
         }
     }
@@ -91,8 +99,10 @@ public class UserDAO {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             try (PreparedStatement p1 = conn.prepareStatement("DELETE FROM education WHERE user_id=?");
-                 PreparedStatement p2 = conn.prepareStatement("DELETE FROM skills WHERE user_id=?");
-                 PreparedStatement p3 = conn.prepareStatement("DELETE FROM users WHERE id=?")) {
+                 PreparedStatement p2 = conn.prepareStatement("DELETE FROM experience WHERE user_id=?");
+                 PreparedStatement p3 = conn.prepareStatement("DELETE FROM skills WHERE user_id=?");
+                 PreparedStatement p4 = conn.prepareStatement("DELETE FROM projects WHERE user_id=?");
+                 PreparedStatement p5 = conn.prepareStatement("DELETE FROM users WHERE id=?")) {
 
                 p1.setInt(1, id);
                 p1.executeUpdate();
@@ -102,6 +112,12 @@ public class UserDAO {
 
                 p3.setInt(1, id);
                 p3.executeUpdate();
+
+                p4.setInt(1, id);
+                p4.executeUpdate();
+
+                p5.setInt(1, id);
+                p5.executeUpdate();
 
                 conn.commit();
             } catch (SQLException ex) {
