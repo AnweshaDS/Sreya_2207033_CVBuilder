@@ -5,16 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:sqlite:app.db"; // local file database
+
+    private static final String URL = "jdbc:sqlite:app.db";
 
     public static Connection getConnection() throws SQLException {
         try {
-            Class.forName("org.sqlite.JDBC"); // ← IMPORTANT
+            Class.forName("org.sqlite.JDBC"); // ensure driver available
         } catch (ClassNotFoundException e) {
-            System.out.println(" SQLite JDBC driver not found!");
+            System.err.println("SQLite driver not found: " + e.getMessage());
         }
-
         return DriverManager.getConnection(URL);
     }
-
 }

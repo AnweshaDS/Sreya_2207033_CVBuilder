@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.sreya_2207033_cvbuilder.RecordsController">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.sreya_2207033_cvbuilder.RecordsController"
+      style="-fx-background-color: #1a1a2e;">
 
-    <center>
-        <ListView fx:id="recordsList" prefWidth="300" prefHeight="400"/>
-    </center>
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #16213e; -fx-padding: 14 20 14 20;">
+        <Button fx:id="backBtn" onAction="#handleBack" text="← Back"
+                style="-fx-background-color: #8B0000; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16 6 16;" />
+        <Label text="Saved CV Records" textFill="#FFF8DC">
+            <font><Font name="Arial Bold" size="26" /></font>
+        </Label>
+    </HBox>
 
-</BorderPane>
+    <!-- record cards -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background: #1a1a2e; -fx-background-color: #1a1a2e;">
+        <VBox fx:id="recordsContainer" spacing="18" style="-fx-background-color: #1a1a2e;">
+            <padding><Insets bottom="24" left="24" right="24" top="24" /></padding>
+        </VBox>
+    </ScrollPane>
+
+</VBox>

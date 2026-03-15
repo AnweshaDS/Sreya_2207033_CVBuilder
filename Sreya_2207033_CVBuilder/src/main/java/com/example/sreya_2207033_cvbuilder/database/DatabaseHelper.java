@@ -12,11 +12,19 @@ import java.util.List;
 
 public class DatabaseHelper {
 
+    private static File getPhotoStorageFolder() {
+        String localAppData = System.getenv("LOCALAPPDATA");
+        if (localAppData != null && !localAppData.isBlank()) {
+            return new File(localAppData, "CVBuilder/photos");
+        }
+        return new File(System.getProperty("user.home"), ".cvbuilder/photos");
+    }
+
     // -----------------------------
     // PHOTO COPY FUNCTION (FIXED)
     // -----------------------------
     public static String copyPhotoToApp(File src) throws IOException {
-        File folder = new File("photos");
+        File folder = getPhotoStorageFolder();
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, System.currentTimeMillis() + "_" + src.getName());

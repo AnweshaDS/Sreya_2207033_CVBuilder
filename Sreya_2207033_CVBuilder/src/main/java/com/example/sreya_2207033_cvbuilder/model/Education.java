@@ -6,10 +6,7 @@ public class Education {
     private String details;
 
     public Education() {}
-    public Education(int userId, String details) {
-        this.userId = userId;
-        this.details = details;
-    }
+    public Education(int userId, String details) { this.userId = userId; this.details = details; }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
