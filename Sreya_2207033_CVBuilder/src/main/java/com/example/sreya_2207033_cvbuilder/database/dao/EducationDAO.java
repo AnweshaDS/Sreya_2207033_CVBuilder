@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EducationDAO {
 
-    public void insertEducation(int userId, String details) throws SQLException {
+    public void insert(int userId, String details) throws SQLException {
         String sql = "INSERT INTO education(user_id, details) VALUES(?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -19,8 +19,8 @@ public class EducationDAO {
         }
     }
 
-    public List<Education> getByUserId(int userId) throws SQLException {
-        List<Education> list = new ArrayList<>();
+    public List<Education> getByUser(int userId) throws SQLException {
+        List<Education> out = new ArrayList<>();
         String sql = "SELECT id, user_id, details FROM education WHERE user_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -31,14 +31,14 @@ public class EducationDAO {
                     e.setId(rs.getInt("id"));
                     e.setUserId(rs.getInt("user_id"));
                     e.setDetails(rs.getString("details"));
-                    list.add(e);
+                    out.add(e);
                 }
             }
         }
-        return list;
+        return out;
     }
 
-    public void deleteByUserId(int userId) throws SQLException {
+    public void deleteByUser(int userId) throws SQLException {
         String sql = "DELETE FROM education WHERE user_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {

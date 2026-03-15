@@ -9,59 +9,41 @@ import java.util.List;
 
 public class ProjectDAO {
 
-    public void insert(int userId, String description) throws SQLException {
-        String sql = "INSERT INTO project (user_id, description) VALUES (?, ?)";
-
+    public void insert(int userId, String desc) throws SQLException {
+        String sql = "INSERT INTO projects(user_id, description) VALUES(?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, userId);
-            stmt.setString(2, description);
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setString(2, desc);
+            ps.executeUpdate();
         }
     }
 
-    public List<Project> getByUserId(int userId) {
-        List<Project> list = new ArrayList<>();
-        String sql = "SELECT * FROM project WHERE user_id = ?";
-
+    public List<Project> getByUser(int userId) throws SQLException {
+        List<Project> out = new ArrayList<>();
+        String sql = "SELECT id, user_id, description FROM projects WHERE user_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Project project = new Project();
-                project.setId(rs.getInt("id"));
-                project.setUserId(rs.getInt("user_id"));
-                project.setDescription(rs.getString("description"));
-                list.add(project);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Project p = new Project();
+                    p.setId(rs.getInt("id"));
+                    p.setUserId(rs.getInt("user_id"));
+                    p.setDescription(rs.getString("description"));
+                    out.add(p);
+                }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        return list;
+        return out;
     }
 
-    // DELETE all projects for a user
-    public void deleteByUserId(int userId) {
-        String sql = "DELETE FROM project WHERE user_id = ?";
-
+    public void deleteByUser(int userId) throws SQLException {
+        String sql = "DELETE FROM projects WHERE user_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, userId);
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
         }
     }
 }
