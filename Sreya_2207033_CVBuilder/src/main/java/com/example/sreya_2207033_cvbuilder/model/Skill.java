@@ -6,10 +6,7 @@ public class Skill {
     private String skillName;
 
     public Skill() {}
-    public Skill(int userId, String skillName) {
-        this.userId = userId;
-        this.skillName = skillName;
-    }
+    public Skill(int userId, String skillName) { this.userId = userId; this.skillName = skillName; }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

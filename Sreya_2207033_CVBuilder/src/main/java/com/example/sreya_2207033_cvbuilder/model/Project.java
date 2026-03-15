@@ -6,39 +6,14 @@ public class Project {
     private String description;
 
     public Project() {}
+    public Project(int userId, String description) { this.userId = userId; this.description = description; }
 
-    public Project(int userId, String description) {
-        this.userId = userId;
-        this.description = description;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", description='" + description + '\'' +
-                '}';
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }

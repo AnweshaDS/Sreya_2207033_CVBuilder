@@ -10,11 +10,12 @@ public class User {
 
     public User() {}
 
-    public User(String fullName, String email, String phone, String address) {
+    public User(String fullName, String email, String phone, String address, String photoPath) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.photoPath = photoPath;
     }
 
     public int getId() { return id; }
