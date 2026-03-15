@@ -4,7 +4,7 @@ A JavaFX application to generate CV after taking diiferent types of informations
 
 
 
-**Number of Page:03**
+**Number of Page:04**
 
 1.Cover page
 
@@ -62,5 +62,5 @@ A JavaFX application to generate CV after taking diiferent types of informations
 
 3.Display alerts and confirmations are added.
 
-4.The database can only save the users personal information, couldn't add the other parts in the database saved page.
+4.The database can save the users all information which were taken and show them in the records page.
 
