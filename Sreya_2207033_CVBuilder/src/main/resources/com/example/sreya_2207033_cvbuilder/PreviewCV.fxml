@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,26 +8,40 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sreya_2207033_cvbuilder.PreviewCVController">
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sreya_2207033_cvbuilder.PreviewCVController">
 
-    <VBox prefWidth="1000" spacing="25" style="-fx-padding: 30; -fx-background-color: #008B8B;">
+    <VBox prefWidth="1000" spacing="16" style="-fx-background-color: #1a1a2e;">
+        <padding>
+            <Insets bottom="24" left="24" right="24" top="24" />
+        </padding>
+
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #16213e; -fx-background-radius: 10; -fx-padding: 12 16 12 16;">
+            <Label text="CV Preview" textFill="#FFF8DC">
+                <font>
+                    <Font name="Arial Bold" size="26.0" />
+                </font>
+            </Label>
+        </HBox>
 
         <!-- Center Container -->
-        <VBox alignment="TOP_CENTER" maxWidth="800" spacing="20">
+        <VBox alignment="TOP_CENTER" maxWidth="920" spacing="18"
+              style="-fx-background-color: #16213e; -fx-background-radius: 14; -fx-border-color: #0f3460; -fx-border-radius: 14; -fx-padding: 22;">
 
             <!-- Header Section -->
             <HBox alignment="CENTER_LEFT" spacing="25">
-                <ImageView fx:id="previewPhoto" fitHeight="150" fitWidth="150" style="-fx-border-color: #000; -fx-background-color: white;" />
+                <ImageView fx:id="previewPhoto" fitHeight="150" fitWidth="150" style="-fx-border-color: #0f3460; -fx-border-width: 2; -fx-background-color: #1a1a2e;" />
 
                 <VBox spacing="5">
-                    <Label fx:id="previewName" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #F0F8FF;" />
+                    <Label fx:id="previewName" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #E6EAF2;" />
 
-                    <Label fx:id="previewEmail" style="-fx-text-fill: #F0F8FF;" />
+                    <Label fx:id="previewEmail" style="-fx-text-fill: #B8C3D9;" />
 
-                    <Label fx:id="previewPhone" style="-fx-text-fill: #F0F8FF;" />
+                    <Label fx:id="previewPhone" style="-fx-text-fill: #B8C3D9;" />
 
-                    <Label fx:id="previewAddress" style="-fx-text-fill: #F0F8FF;" />
+                    <Label fx:id="previewAddress" style="-fx-text-fill: #B8C3D9;" />
                 </VBox>
             </HBox>
 
@@ -34,36 +49,40 @@
 
             <!-- Education Section -->
             <VBox spacing="10">
-                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-background-color: #FFF8DC;" text="Education" />
-                <VBox fx:id="previewEducationList" spacing="5" style="-fx-text-fill: #F0F8FF;" />
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #FFF8DC;" text="Education" />
+                <VBox fx:id="previewEducationList" spacing="5" style="-fx-text-fill: #D7E0EF;" />
             </VBox>
 
             <Separator />
 
             <!-- Skills Section -->
             <VBox spacing="10">
-                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-background-color: #FFF8DC;" text="Skills" />
-                <Label fx:id="previewSkills" style="-fx-text-fill: #F0F8FF;" wrapText="true" />
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #FFF8DC;" text="Skills" />
+                <Label fx:id="previewSkills" style="-fx-text-fill: #D7E0EF;" wrapText="true" />
             </VBox>
 
             <Separator />
 
             <!-- Experience Section -->
             <VBox spacing="10">
-                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-background-color: #FFF8DC;" text="Experience" />
-                <Label fx:id="previewExperience" style="-fx-text-fill: #F0F8FF;" wrapText="true" />
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #FFF8DC;" text="Experience" />
+                <Label fx:id="previewExperience" style="-fx-text-fill: #D7E0EF;" wrapText="true" />
             </VBox>
 
             <Separator />
 
             <!-- Projects Section -->
             <VBox spacing="10">
-                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-background-color: #FFF8DC;" text="Projects" />
-                <Label fx:id="previewProjects" style="-fx-text-fill: #F0F8FF;" wrapText="true" />
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #FFF8DC;" text="Projects" />
+                <Label fx:id="previewProjects" style="-fx-text-fill: #D7E0EF;" wrapText="true" />
             </VBox>
 
-            <!-- Done Button -->
-            <Button onAction="#handleDone" style="-fx-padding: 12; -fx-font-size: 18px; -fx-background-color: #FFF8DC; -fx-text-fill: black;" text="Save" />
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button onAction="#handleDone" style="-fx-padding: 11 20 11 20; -fx-font-size: 17px; -fx-font-weight: bold; -fx-background-color: #e94560; -fx-text-fill: white;" text="Save" />
+                <Button onAction="#handleSeeRecords" style="-fx-padding: 11 20 11 20; -fx-font-size: 16px; -fx-background-color: #0f3460; -fx-text-fill: white;" text="See the Records" />
+                <Button onAction="#handleBackToCover" style="-fx-padding: 11 20 11 20; -fx-font-size: 16px; -fx-background-color: #8B0000; -fx-text-fill: white;" text="Back to Cover" />
+            </HBox>
 
         </VBox>
 
