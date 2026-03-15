@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+# Local generated data
+app.db
+photos/
+

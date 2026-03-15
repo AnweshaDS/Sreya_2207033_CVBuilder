@@ -1,33 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sreya_2207033_cvbuilder.CoverController">
-    <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#15573e" height="1200.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <VBox layoutX="4.0" layoutY="1.0" style="-fx-background-color: #FFF8DC;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <Label alignment="CENTER" graphicTextGap="5.0" prefHeight="46.0" prefWidth="1800.0" text=" Welcome To CVBuilder!" textFill="#435054">
-                    <font>
-                        <Font name="Bookman Old Style Bold" size="38.0" />
-                    </font>
-                </Label>
-            </children>
-        </VBox>
-        <Button fx:id="createNewCvBtn" alignment="CENTER" layoutX="600.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleCreateNewCv" text="Create New CV" textAlignment="CENTER" textFill="#0a0105">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.sreya_2207033_cvbuilder.CoverController"
+      style="-fx-background-color: #1a1a2e;">
+
+    <!-- Header -->
+    <HBox alignment="CENTER" style="-fx-background-color: #16213e; -fx-padding: 16 20 16 20;">
+        <Label alignment="CENTER" maxWidth="Infinity" text="Welcome To CVBuilder" textFill="#FFF8DC">
             <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="430.0" layoutY="426.0" prefHeight="31.0" prefWidth="484.0" text="This is the CVBuilder to generate your CV comfortably!" textAlignment="CENTER" textFill="#e4ded1">
-            <font>
-                <Font size="20.0" />
+                <Font name="Arial Bold" size="34.0" />
             </font>
         </Label>
-    </children>
-</AnchorPane>
+    </HBox>
+
+    <!-- Main card -->
+    <VBox alignment="CENTER" spacing="26" VBox.vgrow="ALWAYS" style="-fx-padding: 30;">
+        <VBox alignment="CENTER" maxWidth="760" spacing="22"
+              style="-fx-background-color: #16213e; -fx-background-radius: 16; -fx-border-color: #0f3460; -fx-border-radius: 16; -fx-padding: 34 34 30 34;">
+            <Label alignment="CENTER" text="Build Your Professional CV in Minutes" textFill="#E6EAF2" wrapText="true">
+                <font>
+                    <Font name="Arial Bold" size="30.0" />
+                </font>
+            </Label>
+
+            <Label alignment="CENTER" text="Fast, clean, and easy-to-use CV workflow" textFill="#A8B4C8">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+
+            <Button fx:id="createNewCvBtn" mnemonicParsing="false" onAction="#handleCreateNewCv"
+                    style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #e94560; -fx-text-fill: white; -fx-padding: 10 30 10 30;"
+                    text="Create New CV">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+
+            <HBox alignment="CENTER" spacing="16">
+                <Button mnemonicParsing="false" onAction="#handleSeeRecords"
+                        style="-fx-font-size: 15px; -fx-background-color: #0f3460; -fx-text-fill: white; -fx-padding: 9 20 9 20;"
+                        text="See the Records" />
+                <Button mnemonicParsing="false" onAction="#handleExit"
+                        style="-fx-font-size: 15px; -fx-background-color: #8B0000; -fx-text-fill: white; -fx-padding: 9 20 9 20;"
+                        text="Exit" />
+            </HBox>
+
+            <padding>
+                <Insets bottom="4" top="4" />
+            </padding>
+        </VBox>
+    </VBox>
+
+</VBox>
